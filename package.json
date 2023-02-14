@@ -1,0 +1,22 @@
+{
+  "name": "natours",
+  "version": "1.0.0",
+  "description": "Tours app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mern-r2/natours.git"
+  },
+  "author": "Artur Aquino",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mern-r2/natours/issues"
+  },
+  "homepage": "https://github.com/mern-r2/natours#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
