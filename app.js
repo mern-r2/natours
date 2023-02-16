@@ -2,6 +2,7 @@ const fs = require('fs');
 const express = require('express');
 
 const app = express();
+app.use(express.json()); //adds body (post) to req
 
 const fileURI = `${__dirname}/dev-data/data/tours-simple.json`;
 const tours = JSON.parse(fs.readFileSync(fileURI));
