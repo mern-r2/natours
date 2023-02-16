@@ -63,6 +63,15 @@ exports.createTour = (req, res) => {
   });
 };
 
+exports.updateTour = (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    data: {
+      tour: '<Updated tour here...>'
+    }
+  });
+};
+
 exports.deleteTour = (req, res) => {
   res.status(204).json({
     status: 'success',
