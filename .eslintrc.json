@@ -33,7 +33,16 @@
     "no-unused-vars": [
       "error",
       {
-        "argsIgnorePattern": "req|res|next|val"
+        "argsIgnorePattern": "req|res|next|val|^_"
+      }
+    ],
+    "no-shadow": [
+      "error",
+      {
+        "builtinGlobals": false,
+        "hoist": "functions",
+        "allow": [],
+        "ignoreOnInitialization": true
       }
     ]
   }
