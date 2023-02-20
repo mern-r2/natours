@@ -5,12 +5,12 @@ const tourController = require('../controllers/tourController');
 const router = express.Router();
 
 // middleware only for when there is a param named 'id'
-router.param('id', tourController.checkId);
+// router.param('id', tourController.checkId);
 
 router
   .route('/')
   .get(tourController.getAllTours)
-  .post(tourController.checkBody, tourController.createTour);
+  .post(tourController.createTour);
 
 router
   .route('/:id')
