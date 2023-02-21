@@ -14,3 +14,9 @@
 10. virtual property
 11. mongoose middlewares (document, query, aggregate, and model)
 12. model validation
+
+13. debug/production run scripts
+14. operational errors (predictable): failed to connect, invalid path, ... -> error handling middleware
+15. programming errors (code): type mismatch, await with no async, ...
+16. included several errors as operational (db, url, ...)
+17. general uncaught exceptions handling
