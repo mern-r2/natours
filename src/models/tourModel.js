@@ -73,6 +73,10 @@ const tourSchema = new mongoose.Schema(
       select: false,
     },
     startDates: [Date],
+    secretTour: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     toJSON: { virtuals: true },
@@ -86,7 +90,18 @@ tourSchema.virtual('durationWeeks').get(function () {
 
 // Document Middleware: runs before .save() and .create() (not .insertMany())
 tourSchema.pre('save', function (next) {
+  // there are 'post' hooks as well
+  // 'this' is the document
   this.slug = slugify(this.name, { lower: true });
+
+  next();
+});
+
+// Query Middleware: runs before .find() (not .findById() / .findOne())
+tourSchema.pre(/^find/, function (next) {
+  // yes, the difference is the 'save' vs 'find'
+  // 'this' is the query, 'post' can get the result docs from the params (docs, next)
+  this.find({ secretTour: { $ne: true } });
 
   next();
 });
