@@ -1,4 +1,5 @@
-const { default: mongoose } = require('mongoose');
+const mongoose = require('mongoose');
+const slugify = require('slugify');
 
 const tourSchema = new mongoose.Schema(
   {
@@ -11,6 +12,7 @@ const tourSchema = new mongoose.Schema(
       minlength: [10, 'A tour name must have more or equal then 10 characters'],
       // validate: [validator.isAlpha, 'Tour name must only contain characters']
     },
+    slug: String,
     duration: {
       type: Number,
       required: [true, 'A tour must have a duration'],
@@ -80,6 +82,13 @@ const tourSchema = new mongoose.Schema(
 
 tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
+});
+
+// Document Middleware: runs before .save() and .create() (not .insertMany())
+tourSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true });
+
+  next();
 });
 
 const Tour = mongoose.model('Tour', tourSchema);
