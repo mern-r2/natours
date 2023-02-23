@@ -167,7 +167,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // If token has not expired, and there is user, set the new password
   if (!user) {
-    return next(new AppError('Token is invalid or has expired', 400));
+    return next(new AppError('Token is invalid or has expired.', 400));
   }
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
@@ -177,5 +177,25 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // Update changedPasswordAt property for the user (done in a middleware)
   // Log the user in (send JWT)
+  createSendToken(user, 200, res);
+});
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  // Get user from collection
+  const user = await User.findById(req.user.id).select('+password');
+
+  // Check if POSTed current password is correct
+  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+    return next(new AppError('Your current password is wrong.', 401));
+  }
+
+  // Update password
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+  // User.findByIdAndUpdate will NOT work as intended!
+  // because of passwordConfirm validation and middlewares
+
+  // Log user in (send JWT)
   createSendToken(user, 200, res);
 });
