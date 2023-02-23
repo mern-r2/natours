@@ -7,7 +7,7 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
 const signToken = (userId) =>
-  jwt.sign({ id: userId }, env.jwtSecret, { expiresIn: env.expiresIn });
+  jwt.sign({ id: userId }, env.jwtSecret, { expiresIn: env.jwtExpires });
 
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
