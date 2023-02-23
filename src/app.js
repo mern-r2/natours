@@ -2,6 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
 
 const env = require('./config/env');
 
@@ -24,8 +26,11 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 app.use(helmet());
 
-app.use(express.json({ limit: '10kb' })); //adds body (post) to req
+app.use(express.json({ limit: '10kb' })); //adds body (post) to req (max 10kb)
 app.use(express.static(`${__dirname}/../public`)); // serves static files in public folder ('public' omitted from URL)
+
+app.use(mongoSanitize()); // NoSQL injection sanitization (e.g. login with email: { "$gt": "" } matches all users)
+app.use(xss()); // XSS sanitization
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
