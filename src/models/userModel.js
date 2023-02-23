@@ -52,6 +52,8 @@ userSchema.pre('save', async function (next) {
 
   this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined; // do not persist into db
+
+  next();
 });
 
 // instance method, available on the document (user)
@@ -63,7 +65,7 @@ userSchema.methods.correctPassword = async function (
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-userSchema.method.changedPasswordAfter = async function (jwtTimestamp) {
+userSchema.methods.changedPasswordAfter = async function (jwtTimestamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,
