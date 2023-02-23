@@ -48,6 +48,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+// Document middleware
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
 
@@ -58,6 +59,12 @@ userSchema.pre('save', async function (next) {
 
   this.passwordChangedAt = Date.now() - 1000; // to make sure it is before token creation
 
+  next();
+});
+
+// Query middleware
+userSchema.pre('/^find/', function (next) {
+  this.find({ active: { $ne: false } }); // better than '$eq true' because of docs without 'active' property
   next();
 });
 
