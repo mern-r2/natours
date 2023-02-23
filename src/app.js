@@ -1,5 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
 
 const env = require('./config/env');
 
@@ -14,8 +16,16 @@ if (env.env !== 'production') {
   app.use(morgan('dev'));
 }
 
-app.use(express.json()); //adds body (post) to req
-app.use(express.static(`${__dirname}/../public`)); // serves static files in public folder
+const limiter = rateLimit({
+  max: 100, // 100 requests for the same IP
+  windowMs: 60 * 60 * 1000, // for 1 hour
+  message: 'Too many requests from this IP, please try again in an hour.',
+});
+app.use('/api', limiter);
+app.use(helmet());
+
+app.use(express.json({ limit: '10kb' })); //adds body (post) to req
+app.use(express.static(`${__dirname}/../public`)); // serves static files in public folder ('public' omitted from URL)
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
