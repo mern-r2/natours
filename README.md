@@ -20,3 +20,21 @@
 15. programming errors (code): type mismatch, await with no async, ...
 16. included several errors as operational (db, url, ...)
 17. general uncaught exceptions handling
+
+18. signup / login / logout
+19. jwt
+20. roles / authz
+21. forgot / reset password
+22. send email (mailtrap for development)
+23. user routes for current user (get, update, delete)
+24. security implemented
+    - DB: encrypted passwords (bcrypt), reset tokens (SHA256)
+    - Brute force: slow/strong encryption, rate limiting
+    - XSS: jwt in httpOnly cookies, sanitize input, http headers (helmet pkg)
+    - DOS: rate limiting (again), limit body payload (in body-parser)
+    - NoSQL injection: mongoose (well-defined schema), sanitization
+    - other: https, random reset tokens with expiration, revoke jwt after password change, config and error kept private, param pollution
+25. security suggestions
+    - Brute force: limit login attempts
+    - DOS: evil regex (exponential time to run for non-matching inputs)
+    - other: XSRF (csurf pkg), re-authn for critical action (payment), untrusted jwt blacklist, confirm email on signup (send email with link), refresh tokens (more complex), 2FA
