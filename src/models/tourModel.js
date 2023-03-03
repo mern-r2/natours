@@ -78,6 +78,36 @@ const tourSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    startLocation: {
+      // GeoJSON
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point'],
+      },
+      coordinates: [Number],
+      address: String,
+      description: String,
+    },
+    locations: [
+      {
+        type: {
+          type: String,
+          default: 'Point',
+          enum: ['Point'],
+        },
+        coordinates: [Number],
+        address: String,
+        description: String,
+        day: Number,
+      },
+    ],
+    guides: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   {
     toJSON: { virtuals: true },
@@ -100,9 +130,19 @@ tourSchema.pre('save', function (next) {
 
 // Query Middleware: runs before .find() (not .findById() / .findOne())
 tourSchema.pre(/^find/, function (next) {
-  // yes, the difference is the 'save' vs 'find'
+  // yes, the difference is the 'save' vs 'find' (document vs query middleware)
   // 'this' is the query, 'post' can get the result docs from the params (docs, next)
   this.find({ secretTour: { $ne: true } });
+
+  next();
+});
+
+tourSchema.pre(/^find/, function (next) {
+  //populate uses a new query
+  this.populate({
+    path: 'guides',
+    select: '-__v -passwordChangedAt',
+  });
 
   next();
 });
