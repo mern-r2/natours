@@ -2,5 +2,9 @@
 
 **/*.env
 
+**/*.cache
+
 node_modules
 info
+
+bundle.js*

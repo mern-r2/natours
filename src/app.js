@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const cookieParser = require('cookie-parser');
 
 const env = require('./config/env');
 
@@ -35,6 +36,8 @@ app.use('/api', limiter);
 app.use(helmet());
 
 app.use(express.json({ limit: '10kb' })); //adds body (post) to req (max 10kb)
+app.use(cookieParser()); // parses data from cookie
+
 app.use(mongoSanitize()); // NoSQL injection sanitization (e.g. login with email: { "$gt": "" } matches all users)
 app.use(xss()); // XSS sanitization
 app.use(
