@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
@@ -13,8 +14,13 @@ const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
+const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
+
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, '/../public'))); // serves static files in public folder ('public' omitted from URL)
 
 if (env.env !== 'production') {
   app.use(morgan('dev'));
@@ -29,8 +35,6 @@ app.use('/api', limiter);
 app.use(helmet());
 
 app.use(express.json({ limit: '10kb' })); //adds body (post) to req (max 10kb)
-app.use(express.static(`${__dirname}/../public`)); // serves static files in public folder ('public' omitted from URL)
-
 app.use(mongoSanitize()); // NoSQL injection sanitization (e.g. login with email: { "$gt": "" } matches all users)
 app.use(xss()); // XSS sanitization
 app.use(
@@ -46,6 +50,10 @@ app.use(
   })
 ); // prevent http parameter pollution (e.g. sorting by 2 fields)
 
+//app.use('/', viewRouter);
+app.get('/', (req, res) => {
+  res.status(200).render('base');
+});
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
