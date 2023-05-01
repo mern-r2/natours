@@ -116,13 +116,13 @@ const tourSchema = new mongoose.Schema(
   }
 );
 
-tourSchema.virtual('durationWeeks').get(function () {
-  return this.duration / 7;
-});
-
 tourSchema.index({ price: 1, ratingsAverage: -1 }); // compound index
 tourSchema.index({ slug: 1 });
 tourSchema.index({ startLocation: '2dsphere' });
+
+tourSchema.virtual('durationWeeks').get(function () {
+  return this.duration / 7;
+});
 
 // Virtual populate, similar to 'durationWeeks', but with other table content
 tourSchema.virtual('reviews', {
@@ -160,12 +160,13 @@ tourSchema.pre(/^find/, function (next) {
 });
 
 // Aggregation Middleware: runs before aggregation
-tourSchema.pre('aggregate', function (next) {
-  // 'this' is the aggregation object
-  this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
+// Removed so that geoNear aggregation (controller) can work easily
+// tourSchema.pre('aggregate', function (next) {
+//   // 'this' is the aggregation object
+//   this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
 
-  next();
-});
+//   next();
+// });
 
 const Tour = mongoose.model('Tour', tourSchema);
 
