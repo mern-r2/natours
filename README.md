@@ -35,6 +35,19 @@
     - NoSQL injection: mongoose (well-defined schema), sanitization
     - other: https, random reset tokens with expiration, revoke jwt after password change, config and error kept private, param pollution
 25. security suggestions
+
     - Brute force: limit login attempts
     - DOS: evil regex (exponential time to run for non-matching inputs)
     - other: XSRF (csurf pkg), re-authn for critical action (payment), untrusted jwt blacklist, confirm email on signup (send email with link), refresh tokens (more complex), 2FA
+
+26. geospatial data modeling (tour locations)
+27. Relationship between mongo collections (child / parent referencing, embedding, ...)
+28. Populating document references and virtual populate
+29. Nested routes with populated attributes for relationships
+30. Virtual populate: 'get' on parent also returns children it has no reference to (parent referencing)
+31. Nested routes
+32. Factory functions for controllers (models as closures "memory")
+33. Database indexing
+34. Geospatial aggregation queries
+
+35.
