@@ -13,6 +13,7 @@ exports.getAll = (Model) =>
       .sort()
       .limitFields()
       .paginate();
+    // features.dbQuery.explain(); to more information, or debugging
     const doc = await features.dbQuery;
 
     res.status(200).json({
