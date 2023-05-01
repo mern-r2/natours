@@ -50,10 +50,7 @@ app.use(
   })
 ); // prevent http parameter pollution (e.g. sorting by 2 fields)
 
-//app.use('/', viewRouter);
-app.get('/', (req, res) => {
-  res.status(200).render('base', { title: 'Sample Title' });
-});
+app.use('/', viewRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
