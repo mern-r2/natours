@@ -7,7 +7,7 @@ const env = {
   port: process.env.PORT,
   db,
   jwtSecret: process.env.JWT_SECRET,
-  jwtExpires: process.env.JWT_EXPIRES_IN,
+  jwtExpires: parseInt(process.env.JWT_EXPIRES_IN, 10),
   emailHost: process.env.EMAIL_HOST,
   emailPort: process.env.EMAIL_PORT,
   emailUser: process.env.EMAIL_USER,
