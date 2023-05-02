@@ -50,4 +50,7 @@
 33. Database indexing
 34. Geospatial aggregation queries
 
-35.
+35. Enable pug templates in express
+36. Include and Extend (block) templates
+37. Front-end login/logout and Parcel/Babel
+38. Handle form submission to update profile fields
