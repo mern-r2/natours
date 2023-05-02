@@ -50,8 +50,9 @@ exports.getAccount = (req, res) => {
   });
 };
 
+// only if using form submit, but the backend API is being used (not this function)
 exports.updateUserData = catchAsync(async (req, res, next) => {
-  await User.findByIdAndUpdate(
+  const updatedUser = await User.findByIdAndUpdate(
     req.user.id,
     {
       name: req.body.name,
@@ -65,5 +66,6 @@ exports.updateUserData = catchAsync(async (req, res, next) => {
 
   res.status(200).render('account', {
     title: 'Your account',
+    user: updatedUser,
   });
 });

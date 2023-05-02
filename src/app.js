@@ -36,6 +36,7 @@ app.use('/api', limiter);
 app.use(helmet());
 
 app.use(express.json({ limit: '10kb' })); //adds body (post) to req (max 10kb)
+app.use(express.urlencoded({ extended: true, limit: '10kb' })); // parse form data
 app.use(cookieParser()); // parses data from cookie
 
 app.use(mongoSanitize()); // NoSQL injection sanitization (e.g. login with email: { "$gt": "" } matches all users)
