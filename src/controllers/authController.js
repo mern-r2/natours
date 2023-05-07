@@ -13,10 +13,9 @@ const signToken = (userId) =>
 
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
-  const dayInMillisecs = 24 * 60 * 60 * 1000;
 
   const cookieOptions = {
-    expires: new Date(Date.now() + env.jwtExpires * dayInMillisecs),
+    expires: new Date(Date.now() + env.jwtExpires),
     httpOnly: true,
   };
   if (env.env === 'production') cookieOptions.secure = true;
