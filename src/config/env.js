@@ -14,6 +14,9 @@ const env = {
   emailPort: process.env.EMAIL_PORT,
   emailUser: process.env.EMAIL_USER,
   emailPassword: process.env.EMAIL_PASSWORD,
+  emailFrom: process.env.EMAIL_FROM,
+  emailUserPrd: process.env.SENDGRID_USERNAME,
+  emailPasswordPrd: process.env.SENDGRID_PASSWORD,
 };
 
 module.exports = env;
