@@ -58,3 +58,8 @@
 39. Upload photos with multer (single and array)
 40. Resize photo before saving
 41. Payments with Stripe
+
+42. Compress all text sent to clients (compression middleware)
+43. Handle heroku specific signals / https config
+44. CORs
+45. Stripe Webhook for payment conclusion
