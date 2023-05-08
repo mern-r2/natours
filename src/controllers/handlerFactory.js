@@ -31,7 +31,7 @@ exports.getOne = (Model, populateOptions) =>
     if (populateOptions) query = query.populate(populateOptions);
     const doc = await query;
 
-    if (!doc) return next(new AppError('No document found with that ID', 404));
+    if (!doc) return next(new AppError('No document found with that Id', 404));
 
     res.status(200).json({
       status: 'success',
@@ -60,7 +60,7 @@ exports.updateOne = (Model) =>
       runValidators: true,
     });
 
-    if (!doc) return next(new AppError('No document found with that ID', 404));
+    if (!doc) return next(new AppError('No document found with that Id', 404));
 
     res.status(200).json({
       status: 'success',
@@ -74,7 +74,7 @@ exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findByIdAndDelete(req.params.id);
 
-    if (!doc) return next(new AppError('No document found with that ID', 404));
+    if (!doc) return next(new AppError('No document found with that Id', 404));
 
     res.status(204).json({
       status: 'success',

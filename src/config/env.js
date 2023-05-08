@@ -17,6 +17,7 @@ const env = {
   emailFrom: process.env.EMAIL_FROM,
   emailUserPrd: process.env.SENDGRID_USERNAME,
   emailPasswordPrd: process.env.SENDGRID_PASSWORD,
+  stripeKey: process.env.STRIPE_SECRET_KEY,
 };
 
 module.exports = env;
