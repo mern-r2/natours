@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 const csp = require('express-csp');
 
@@ -23,9 +24,21 @@ const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
+app.enable('trust proxy');
+
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '/../public'))); // serves static files in public folder ('public' omitted from URL)
+
+app.use(cors()); // header for everything: Access-Control-Allow-Origin *
+// only for front-end (let's say natours.com is the front-end):
+// app.use(cors({
+//   origin: 'https://www.natours.com'
+// }))
+
+// for non-simple requests (no GET/POST, send cookies, etc)
+// options safe verification happens before the request
+app.options('*', cors()); // all routes: '*', could be '/api/v1/tours/:id' for example
 
 if (env.env !== 'production') {
   app.use(morgan('dev'));
