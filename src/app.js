@@ -20,6 +20,7 @@ const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
+const bookingController = require('./controllers/bookingController');
 const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
@@ -117,6 +118,13 @@ csp.extend(app, {
     },
   },
 });
+
+// it is here to be raw, not be converted to JSON (next line)
+app.post(
+  '/webhook-checkout',
+  express.raw({ type: 'application.json' }),
+  bookingController.webhookCheckout
+);
 
 app.use(express.json({ limit: '10kb' })); //adds body (post) to req (max 10kb)
 app.use(express.urlencoded({ extended: true, limit: '10kb' })); // parse form data
