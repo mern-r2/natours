@@ -31,6 +31,7 @@
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-csp": "^0.1.3",
     "express-mongo-sanitize": "^2.2.0",
     "express-rate-limit": "^6.7.0",
     "helmet": "^6.0.1",
@@ -44,6 +45,7 @@
     "pug": "^3.0.2",
     "sharp": "^0.32.1",
     "slugify": "^1.6.5",
+    "stripe": "^12.4.0",
     "validator": "^13.9.0",
     "xss-clean": "^0.1.1"
   },

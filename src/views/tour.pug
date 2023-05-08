@@ -3,7 +3,7 @@ include _reviewCard
 
 block append head
   //- could be installed via npm, but there are some issues with Parcel
-  script(src='https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js')
+  script(crossorigin="anonymous" src='https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js')
   link(href='https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet')
 
 mixin overviewBox(label, text, icon)
