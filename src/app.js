@@ -7,6 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const csp = require('express-csp');
 
@@ -122,6 +123,8 @@ app.use(
     ],
   })
 ); // prevent http parameter pollution (e.g. sorting by 2 fields)
+
+app.use(compression()); // compress all text sent to clients
 
 app.use('/', viewRouter);
 app.use('/api/v1/tours', tourRouter);
