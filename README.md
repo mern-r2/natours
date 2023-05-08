@@ -54,3 +54,7 @@
 36. Include and Extend (block) templates
 37. Front-end login/logout and Parcel/Babel
 38. Handle form submission to update profile fields
+
+39. Upload photos with multer (single and array)
+40. Resize photo before saving
+41. Payments with Stripe
