@@ -1,65 +1,68 @@
-# natours
+<h1 align="center"> Natours </h1>
 
-0. Basic routing with a in memory / file database
-1. MVC taking form
-2. Env config
-3. Lint
-4. morgan logs
+<p align="center">
+  <a href="#-project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-running">Running</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-license">License</a>
+</p>
 
-5. adds db env vars (remember to add db at the end of the url, before the params)
-6. updates to use mongo db
-7. queries with filtering, sorting, pagination, and aliasing
-8. query alias
-9. aggregation pipelines
-10. virtual property
-11. mongoose middlewares (document, query, aggregate, and model)
-12. model validation
+<br>
 
-13. debug/production run scripts
-14. operational errors (predictable): failed to connect, invalid path, ... -> error handling middleware
-15. programming errors (code): type mismatch, await with no async, ...
-16. included several errors as operational (db, url, ...)
-17. general uncaught exceptions handling
+## 💻 Project
 
-18. signup / login / logout
-19. jwt
-20. roles / authz
-21. forgot / reset password
-22. send email (mailtrap for development)
-23. user routes for current user (get, update, delete)
-24. security implemented
-    - DB: encrypted passwords (bcrypt), reset tokens (SHA256)
-    - Brute force: slow/strong encryption, rate limiting
-    - XSS: jwt in httpOnly cookies, sanitize input, http headers (helmet pkg)
-    - DOS: rate limiting (again), limit body payload (in body-parser)
-    - NoSQL injection: mongoose (well-defined schema), sanitization
-    - other: https, random reset tokens with expiration, revoke jwt after password change, config and error kept private, param pollution
-25. security suggestions
+Natours is an app that provides a list of tours that can be booked and paid for. It has the following features:
 
-    - Brute force: limit login attempts
-    - DOS: evil regex (exponential time to run for non-matching inputs)
-    - other: XSRF (csurf pkg), re-authn for critical action (payment), untrusted jwt blacklist, confirm email on signup (send email with link), refresh tokens (more complex), 2FA
+- Authentication by login
+- Autorization according to user roles (or even a guest access)
+- REST API
+- Tour: CRUD, booking, review, rating, ploting on a map
+- User profile with including email, password, photo, and possibility to update most of them
+- Credit card payment via Stripe
+- Whatsapp redirection
+- Counter for how many users reached teachers by whatsapp
 
-26. geospatial data modeling (tour locations)
-27. Relationship between mongo collections (child / parent referencing, embedding, ...)
-28. Populating document references and virtual populate
-29. Nested routes with populated attributes for relationships
-30. Virtual populate: 'get' on parent also returns children it has no reference to (parent referencing)
-31. Nested routes
-32. Factory functions for controllers (models as closures "memory")
-33. Database indexing
-34. Geospatial aggregation queries
 
-35. Enable pug templates in express
-36. Include and Extend (block) templates
-37. Front-end login/logout and Parcel/Babel
-38. Handle form submission to update profile fields
+![Screenshot](info/all-tours.png)
 
-39. Upload photos with multer (single and array)
-40. Resize photo before saving
-41. Payments with Stripe
 
-42. Compress all text sent to clients (compression middleware)
-43. Handle heroku specific signals / https config
-44. CORs
-45. Stripe Webhook for payment conclusion
+### Tech Stack
+
+- [Node.js](https://nodejs.org/en/)
+- [Express](https://expressjs.com/pt-br/)
+- [MongoDB](https://www.mongodb.com/)
+- [JavaScript](https://www.javascript.com/)
+- [Pug Templates](https://pugjs.org/api/getting-started.html)
+- [JWT](https://jwt.io/)
+- [Parcel](https://parceljs.org/)
+- [Mapbox](https://www.mapbox.com/)
+- [Stripe](https://stripe.com/en-br)
+- [Mailtrap](https://mailtrap.io/)
+- [Sendgrid](https://sendgrid.com/)
+- [Heroku](https://www.heroku.com/)
+
+## 🚀 Running
+
+1. Create a `dev.env` file in `src/config` folder with the environment variables used in `env.js` file in the same folder.
+
+2. On the root folder install the dependencies
+```sh
+  $ npm install
+```
+
+2. Build js bundle
+```sh
+  $ npm run build:js
+```
+
+3. Run
+```sh
+  $ npm run start
+```
+
+Some other running scripts can be chosen (such as building the js bundle interactively, in watch mode) in `package.json`.
+
+![Screenshot](info/tour.png)
+
+## :memo: License
+
+From Udemy course Node.js, Express, MongoDB & More: The Complete Bootcamp
