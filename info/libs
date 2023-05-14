@@ -1,0 +1,45 @@
+npm i -D eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-config-airbnb eslint-plugin-node eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react
+
+eslint-config-prettier -> disable eslint formatting (using prettier for it)
+eslint-plugin-prettier -> eslint show formatting erros using prettier
+eslint-config-airbnb -> airbnb style guide
+eslint-plugin-node -> eslint rules for nodejs
+eslint-plugin-import -> airbnb dependency
+eslint-plugin-jsx-a11y -> airbnb dependency
+eslint-plugin-react -> airbnb dependency
+
+
+npm init -> creat node project
+npm i express@4 -> aux
+npm i morgan -> see req data in the console
+npm i dotenv -> set env vars from file
+npm i mongoose@5 -> mongodb driver
+npm i slugify -> slug (friendly URL for search engines)
+npm i validator -> model validation (not used, only as ref)
+
+npm i ndb --global
+
+npm i validator -> model validation (used for user email)
+npm i bcryptjs -> cryptograph password
+npm i jsonwebtoken -> jwt
+npm i nodemailer -> send emails
+npm i express-rate-limit
+npm i helmet -> http secure headers
+npm i express-mongo-sanitize
+npm i xss-clean
+npm i hpp -> http paramater pollution
+
+npm i pug -> pug templates
+npm i cookie-parser -> parse cookies from incoming request
+npm i parcel-bundler --save-dev -> bundler, like Webpack
+npm i axios
+npm i @babel/polyfill -> port newer js features
+
+npm i multer
+npm i sharp
+npm i html-to-text
+npm i stripe
+npm i express-csp
+
+npm i compression
+npm i cors
